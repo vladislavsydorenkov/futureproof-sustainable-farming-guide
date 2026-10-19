@@ -106,13 +106,13 @@ nav .wrap{height:86px}
 @media(max-width:900px){.film-head,.motion-split,.motion-split.flip,.challenge-motion{grid-template-columns:1fr}.motion-split.flip .motion-copy,.motion-split.flip .motion-large{order:initial}.motion-large{min-height:360px}.motion-wide-copy{display:block}.motion-wide-copy p{margin-top:18px}.motion-wide{min-height:360px;height:65vw}}
 @media(max-width:560px){.film-section,.motion-break{padding:72px 0}.motion-large{min-height:300px;border-radius:18px}.motion-wide{min-height:300px;border-radius:18px}.film-frame{border-radius:18px}.sound-toggle{right:12px;bottom:12px}.film-caption{display:block}.film-caption span{display:block;margin-top:5px}}
 </style>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynxNVZB1MZqK5YbM7GqH2H8q4qQ0=" crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 .real-map-shell{margin-top:18px;border-radius:26px;overflow:hidden;border:1px solid #bdb8aa;background:#0d2119;box-shadow:0 24px 70px rgba(16,37,27,.16)}
 .real-map-top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;background:#10251b;color:#fff;border-bottom:1px solid rgba(255,255,255,.12)}
 .real-map-top strong{font-size:15px}.real-map-status{display:flex;align-items:center;gap:8px;color:#b9c9bf;font-size:11px}.live-dot{width:8px;height:8px;border-radius:50%;background:#b8f06b;box-shadow:0 0 0 5px rgba(184,240,107,.12)}
 .real-map-actions{display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px;background:#f3efe5;border-bottom:1px solid #d6d0c2}.map-control-btn{border:1px solid #c9c3b5;background:#fff;color:#10251b;border-radius:999px;padding:9px 13px;font:700 11px/1 Arial,sans-serif;cursor:pointer}.map-control-btn:hover{background:#10251b;color:#fff}
-#challengeMap{height:680px;width:100%;background:#dfe5dc}.leaflet-container{font-family:Arial,sans-serif}.leaflet-popup-content-wrapper{border-radius:16px;box-shadow:0 14px 40px rgba(0,0,0,.2)}.leaflet-popup-content{margin:16px 18px;line-height:1.45}.map-popup-kicker{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#718078}.map-popup-title{font-family:Georgia,serif;font-size:22px;color:#10251b;margin:4px 0 8px}.map-popup-badge{display:inline-block;border-radius:999px;padding:5px 8px;font-size:9px;font-weight:800;background:#dff6b8;color:#17301f}.map-popup-muted{font-size:11px;color:#68756d;margin-top:8px}
+#challengeMap{height:680px;width:100%;background:linear-gradient(135deg,#eef1e9,#dfe7dd)}.leaflet-container{font-family:Arial,sans-serif}.leaflet-popup-content-wrapper{border-radius:16px;box-shadow:0 14px 40px rgba(0,0,0,.2)}.leaflet-popup-content{margin:16px 18px;line-height:1.45}.map-popup-kicker{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#718078}.map-popup-title{font-family:Georgia,serif;font-size:22px;color:#10251b;margin:4px 0 8px}.map-popup-badge{display:inline-block;border-radius:999px;padding:5px 8px;font-size:9px;font-weight:800;background:#dff6b8;color:#17301f}.map-popup-muted{font-size:11px;color:#68756d;margin-top:8px}
 .real-map-legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:13px 16px;background:#10251b;color:#c7d3cb;font-size:10px}.legend-item{display:flex;align-items:center;gap:7px}.legend-swatch{width:16px;height:10px;border-radius:3px;border:1px solid rgba(255,255,255,.35)}.legend-line{width:20px;height:0;border-top:3px solid #ffb04a}
 .map-source-note{margin-left:auto;color:#8fa197;font-size:9px}.map-loading{position:absolute;z-index:700;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(16,37,27,.94);color:#fff;padding:13px 17px;border-radius:999px;font-size:11px;pointer-events:none}.map-wrap-real{position:relative}
 @media(max-width:850px){#challengeMap{height:560px}.real-map-top{align-items:flex-start;flex-direction:column}.map-source-note{width:100%;margin-left:0}}
@@ -152,7 +152,7 @@ nav .wrap{height:86px}
 <div class="real-map-shell reveal">
   <div class="real-map-top">
     <div><strong>Resilient Farming Adoption Challenge · eligibility map</strong><div class="real-map-status"><span class="live-dot"></span><span id="frontlineStatus">Loading current frontline…</span></div></div>
-    <div style="font-size:10px;color:#91a59a;max-width:390px;line-height:1.45">Full-country context · 18 eligible raions · frontline updated from the latest available daily feed</div>
+    <div style="font-size:10px;color:#91a59a;max-width:390px;line-height:1.45">Full-country context · 18 eligible raions · live situation layer over real raion boundaries</div>
   </div>
   <div class="real-map-actions">
     <button class="map-control-btn" id="mapAll" type="button">Ukraine overview</button>
@@ -189,49 +189,85 @@ const mainFilm=document.getElementById('mainFilm');
 const soundToggle=document.getElementById('soundToggle');
 if(mainFilm&&soundToggle){soundToggle.addEventListener('click',()=>{mainFilm.muted=!mainFilm.muted;soundToggle.innerHTML=mainFilm.muted?'Sound on&nbsp; 🔊':'Sound off&nbsp; 🔇';soundToggle.setAttribute('aria-label',mainFilm.muted?'Turn sound on':'Turn sound off');if(mainFilm.paused)mainFilm.play().catch(()=>{});});}
 </script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function(){
   const el=document.getElementById('challengeMap'); if(!el||!window.L)return;
-  const map=L.map(el,{zoomControl:true,scrollWheelZoom:false,minZoom:5,maxZoom:11}).setView([48.8,31.2],6);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors &copy; CARTO'}).addTo(map);
+  const map=L.map(el,{zoomControl:true,scrollWheelZoom:false,minZoom:5,maxZoom:11,attributionControl:false}).setView([48.8,31.2],6);
+  map.createPane('controlPane'); map.getPane('controlPane').style.zIndex=390;
+  map.createPane('raionPane'); map.getPane('raionPane').style.zIndex=410;
+  map.createPane('frontPane'); map.getPane('frontPane').style.zIndex=430;
+
   const eligibleAliases=[
     ['вишгород','vyshhorod'],['буч','bucha'],['фастів','fastiv'],['біла церк','bila tserk'],['обухів','obukhiv'],['бориспіл','borysp'],['бровар','brovar'],
     ['житомир','zhytomyr'],['бердичів','berdych'],['уман','uman'],['звенигород','zvenyhor'],['черкас','cherkas'],
     ['миколаїв','mykolaiv'],['баштан','bashtan'],['вознесен','voznesen'],['первомай','pervomai'],['берислав','beryslav'],['херсон','kherson']
   ];
-  const regionHints={kyiv:['вишгород','буч','фастів','біла церк','обухів','бориспіл','бровар'],zhytomyr:['житомир','бердичів'],cherkasy:['уман','звенигород','черкас'],mykolaiv:['миколаїв','баштан','вознесен','первомай'],kherson:['берислав','херсон']};
   function propsText(f){return Object.values(f.properties||{}).filter(v=>typeof v==='string').join(' ').toLowerCase();}
   function isEligible(f){const t=propsText(f);return eligibleAliases.some(a=>a.some(x=>t.includes(x)));}
   function featureName(f){const p=f.properties||{};return p.name||p.NAME_2||p.admin_2||p.NAME||p.rayon||p.raion||Object.values(p).find(v=>typeof v==='string'&&/район|raion|rayon/i.test(v))||'Raion';}
+  function withTimeout(url,ms=6500){
+    const ctrl=new AbortController(); const timer=setTimeout(()=>ctrl.abort(),ms);
+    return fetch(url,{signal:ctrl.signal,cache:'force-cache'}).then(r=>{clearTimeout(timer);if(!r.ok)throw Error('HTTP '+r.status);return r.json();}).catch(e=>{clearTimeout(timer);throw e;});
+  }
+  async function firstJSON(urls){let last;for(const u of urls){try{return await withTimeout(u)}catch(e){last=e}}throw last||Error('No source');}
+
   let raionLayer,frontLayer,eligibleBounds,frontBounds;
   const loading=document.getElementById('mapLoading');
   const status=document.getElementById('frontlineStatus');
-  const adminUrl='https://raw.githubusercontent.com/Astaryon/UA_geojson/main/rayony.geojson';
-  const frontUrl='https://longlinecode.github.io/russo-ukrainian-front-daily/data/latest.geojson';
-  Promise.allSettled([fetch(adminUrl).then(r=>{if(!r.ok)throw Error('admin');return r.json()}),fetch(frontUrl).then(r=>{if(!r.ok)throw Error('front');return r.json()})]).then(res=>{
-    if(res[0].status==='fulfilled'){
-      const data=res[0].value;
-      raionLayer=L.geoJSON(data,{
-        style:f=>isEligible(f)?{color:'#17301f',weight:1.4,fillColor:'#b8f06b',fillOpacity:.82}:{color:'#9ea79f',weight:.55,fillColor:'#eef0e9',fillOpacity:.42},
-        onEachFeature:(f,l)=>{const ok=isEligible(f);const nm=featureName(f);l.bindPopup('<div class="map-popup-kicker">'+(ok?'Challenge geography':'Ukraine · raion')+'</div><div class="map-popup-title">'+nm+'</div>'+(ok?'<span class="map-popup-badge">Eligible for the proposed Challenge</span><div class="map-popup-muted">Click the regional cards above for the agronomic context behind this geography.</div>':'<div class="map-popup-muted">Not included in the proposed Challenge eligibility geography.</div>'));if(ok)l.on('mouseover',()=>l.setStyle({weight:2.6,fillOpacity:.95})).on('mouseout',()=>raionLayer.resetStyle(l));}
-      }).addTo(map);
-      const elig=[];raionLayer.eachLayer(l=>{if(isEligible(l.feature))elig.push(l.getBounds())});if(elig.length){eligibleBounds=elig.reduce((a,b)=>a.extend(b),elig[0]);}
-    }
-    if(res[1].status==='fulfilled'){
-      const data=res[1].value; const date=(data.properties&&data.properties.data_date)||'latest available';
-      status.textContent='Frontline data · '+date;
-      frontLayer=L.geoJSON(data,{style:f=>{const k=(f.properties&&f.properties.kind)||'';if(k==='russian_control')return{color:'#a63c38',weight:1,fillColor:'#c13f3a',fillOpacity:.42};if(k==='contact_line')return{color:'#ff9f43',weight:4,opacity:1,dashArray:'7 5'};if(k==='ukrainian_control_in_russia')return{color:'#4c8bd8',weight:1.5,fillColor:'#75b8ff',fillOpacity:.4};return{color:'#c13f3a',weight:1.5,fillOpacity:.15};}}).addTo(map);
-      frontBounds=frontLayer.getBounds();
-    }else{status.textContent='Frontline feed unavailable · map still shows eligibility';}
-    if(loading)loading.remove();
+  let adminReady=false;
+
+  function hideLoading(){if(loading){loading.textContent='';loading.style.display='none';}}
+  function showMapError(){if(loading){loading.innerHTML='Map data could not load.<br><span style="font-size:11px;opacity:.7">Refresh the page to try again.</span>';loading.style.display='block';}}
+
+  const adminSources=[
+    'https://cdn.jsdelivr.net/gh/Astaryon/UA_geojson@main/rayony.geojson',
+    'https://raw.githubusercontent.com/Astaryon/UA_geojson/main/rayony.geojson'
+  ];
+  const frontSources=[
+    'https://longlinecode.github.io/russo-ukrainian-front-daily/data/latest.geojson',
+    'https://raw.githubusercontent.com/longlinecode/russo-ukrainian-front-daily/main/data/latest.geojson'
+  ];
+
+  // Build the real administrative map first. The live frontline is deliberately non-blocking.
+  firstJSON(adminSources).then(data=>{
+    raionLayer=L.geoJSON(data,{
+      pane:'raionPane',
+      style:f=>isEligible(f)?{color:'#17301f',weight:1.45,fillColor:'#b8f06b',fillOpacity:.86}:{color:'#a3aba4',weight:.6,fillColor:'#eef0e9',fillOpacity:.58},
+      onEachFeature:(f,l)=>{
+        const ok=isEligible(f), nm=featureName(f);
+        l.bindPopup('<div class="map-popup-kicker">'+(ok?'Challenge geography':'Ukraine · raion')+'</div><div class="map-popup-title">'+nm+'</div>'+(ok?'<span class="map-popup-badge">Eligible for the proposed Challenge</span><div class="map-popup-muted">Use the regional cards above for the agronomic context behind this geography.</div>':'<div class="map-popup-muted">Not included in the proposed Challenge eligibility geography.</div>'));
+        if(ok)l.on('mouseover',()=>l.setStyle({weight:2.6,fillOpacity:.98})).on('mouseout',()=>raionLayer.resetStyle(l));
+      }
+    }).addTo(map);
+    const elig=[];raionLayer.eachLayer(l=>{if(isEligible(l.feature))elig.push(l.getBounds())});
+    if(elig.length)eligibleBounds=elig.reduce((a,b)=>a.extend(b),elig[0]);
+    adminReady=true; hideLoading();
     if(eligibleBounds)map.fitBounds(eligibleBounds.pad(.18));
-    if(frontLayer)frontLayer.bringToBack(); if(raionLayer)raionLayer.bringToFront();
-  });
-  document.getElementById('mapAll')?.addEventListener('click',()=>map.setView([48.8,31.2],6));
+    setTimeout(()=>map.invalidateSize(),100);
+  }).catch(()=>{showMapError();status.textContent='Administrative map unavailable';});
+
+  // Load the situation layer separately so a slow OSINT feed can never hold the map hostage.
+  firstJSON(frontSources).then(data=>{
+    const date=(data.properties&&data.properties.data_date)||'latest available';
+    status.textContent='Frontline data · '+date;
+    frontLayer=L.geoJSON(data,{pane:'frontPane',style:f=>{
+      const k=(f.properties&&f.properties.kind)||'';
+      if(k==='russian_control')return{color:'#a63c38',weight:1,fillColor:'#c13f3a',fillOpacity:.40};
+      if(k==='contact_line')return{color:'#ff9f43',weight:4,opacity:1,dashArray:'7 5'};
+      if(k==='ukrainian_control_in_russia')return{color:'#4c8bd8',weight:1.5,fillColor:'#75b8ff',fillOpacity:.4};
+      return{color:'#c13f3a',weight:1.5,fillOpacity:.15};
+    }}).addTo(map);
+    frontBounds=frontLayer.getBounds();
+  }).catch(()=>{status.textContent='Frontline feed unavailable · eligibility map remains active';});
+
+  // Never leave the user looking at a permanent loading state.
+  setTimeout(()=>{if(!adminReady&&loading&&loading.style.display!=='none')showMapError();},14000);
+
+  document.getElementById('mapAll')?.addEventListener('click',()=>raionLayer?map.fitBounds(raionLayer.getBounds().pad(.03)):map.setView([48.8,31.2],6));
   document.getElementById('mapEligible')?.addEventListener('click',()=>eligibleBounds&&map.fitBounds(eligibleBounds.pad(.15)));
   document.getElementById('mapSouth')?.addEventListener('click',()=>map.fitBounds([[45.9,27.8],[48.6,35.9]],{padding:[20,20]}));
-  document.getElementById('mapFront')?.addEventListener('click',()=>frontBounds&&map.fitBounds(frontBounds.pad(.08)));
+  document.getElementById('mapFront')?.addEventListener('click',()=>frontBounds?map.fitBounds(frontBounds.pad(.08)):status.textContent='Frontline layer is not available right now');
 })();
 </script>
 </body></html>
