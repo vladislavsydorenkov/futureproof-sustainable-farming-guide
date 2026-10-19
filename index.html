@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Futureproof Sustainable Farming Guide | Ukraine 2026</title>
+<meta name="description" content="Field-tested solutions for resilient, profitable and future-ready Ukrainian farms.">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f1e9;
+    color: #132a22;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 94vh;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5, 48, 38, 0.97) 0%,
+            rgba(5, 48, 38, 0.91) 45%,
+            rgba(5, 48, 38, 0.48) 100%
+        ),
+        url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=2000&q=90");
+
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+}
+
+.hero-content {
+    max-width: 920px;
+}
+
+.eyebrow {
+    color: #f3b61f;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+}
+
+h1 {
+    font-size: clamp(55px, 7vw, 105px);
+    line-height: 0.94;
+    letter-spacing: -4px;
+    max-width: 1000px;
+}
+
+.hero-subtitle {
+    font-size: clamp(20px, 2vw, 29px);
+    line-height: 1.4;
+    margin-top: 32px;
+    max-width: 720px;
+    color: #edf2ef;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 42px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 18px 30px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 3px;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background: #f3b61f;
+    color: #0c3027;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    background: #ffc83d;
+}
+
+.btn-secondary {
+    border: 1px solid rgba(255,255,255,0.7);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #0c3027;
+}
+
+/* INTRO */
+
+.intro {
+    padding: 110px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 90px;
+    max-width: 1450px;
+    margin: auto;
+}
+
+.section-number {
+    color: #d99800;
+    font-size: 14px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.intro h2 {
+    font-size: clamp(38px, 5vw, 67px);
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-top: 18px;
+}
+
+.intro-text {
+    font-size: 21px;
+    line-height: 1.65;
+    color: #43534d;
+}
+
+.intro-text strong {
+    color: #12382d;
+}
+
+/* STATEMENT */
+
+.statement {
+    background: #073c30;
+    color: white;
+    padding: 120px 8%;
+}
+
+.statement-inner {
+    max-width: 1250px;
+    margin: auto;
+}
+
+.statement h2 {
+    font-size: clamp(42px, 6vw, 82px);
+    line-height: 1.03;
+    letter-spacing: -3px;
+    max-width: 1100px;
+}
+
+.statement h2 span {
+    color: #f3b61f;
+}
+
+/* PRACTICES */
+
+.practices {
+    padding: 110px 8%;
+    max-width: 1450px;
+    margin: auto;
+}
+
+.practices-header {
+    max-width: 800px;
+    margin-bottom: 65px;
+}
+
+.practices h2 {
+    font-size: clamp(40px, 5vw, 65px);
+    letter-spacing: -2px;
+    margin-top: 15px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: #d5d8d3;
+}
+
+.card {
+    background: #faf9f5;
+    padding: 55px;
+    min-height: 280px;
+}
+
+.card-number {
+    color: #d99800;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card h3 {
+    font-size: 32px;
+    margin: 25px 0 15px;
+}
+
+.card p {
+    color: #58635f;
+    line-height: 1.6;
+    font-size: 17px;
+}
+
+/* WAR SECTION */
+
+.war {
+    background: #e8e1d3;
+    padding: 120px 8%;
+}
+
+.war-inner {
+    max-width: 1250px;
+    margin: auto;
+}
+
+.war h2 {
+    font-size: clamp(45px, 6vw, 78px);
+    line-height: 1;
+    letter-spacing: -3px;
+    max-width: 1000px;
+}
+
+.war p {
+    max-width: 800px;
+    font-size: 21px;
+    line-height: 1.6;
+    margin-top: 35px;
+    color: #46534e;
+}
+
+/* CTA */
+
+.cta {
+    padding: 130px 8%;
+    text-align: center;
+    background: #f3b61f;
+    color: #0a3329;
+}
+
+.cta h2 {
+    font-size: clamp(48px, 7vw, 90px);
+    letter-spacing: -4px;
+}
+
+.cta p {
+    font-size: 21px;
+    max-width: 650px;
+    margin: 25px auto 40px;
+    line-height: 1.5;
+}
+
+.cta .btn {
+    background: #073c30;
+    color: white;
+    padding: 21px 36px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #052c24;
+    color: #d6dfda;
+    padding: 55px 8%;
+}
+
+.footer-inner {
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.footer-title {
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+}
+
+.footer-small {
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 650px;
+    margin-top: 12px;
+    color: #aebcb6;
+}
+
+@media(max-width: 800px) {
+    .hero {
+        padding: 80px 7%;
+        min-height: 90vh;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .intro {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 35px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="hero-content">
+
+        <div class="eyebrow">Ukraine · 2026 · Agricultural Innovation Centre</div>
+
+        <h1>Futureproof<br>Sustainable<br>Farming.</h1>
+
+        <p class="hero-subtitle">
+            Practical solutions for resilient and profitable farms,
+            built from field evidence and the experience of Ukrainian farmers.
+        </p>
+
+        <div class="buttons">
+            <a class="btn btn-primary"
+               href="14102026%20Farmer%20Guide%20EN.pdf"
+               target="_blank">
+                Read the Guide →
+            </a>
+
+            <a class="btn btn-secondary"
+               href="#evidence">
+                Explore the evidence
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="intro" id="evidence">
+
+    <div>
+        <div class="section-number">01 / THE CHALLENGE</div>
+        <h2>Farming through uncertainty.</h2>
+    </div>
+
+    <div class="intro-text">
+        Ukrainian agriculture is operating under extraordinary pressure:
+        war, rising input costs, disrupted logistics, climate volatility,
+        moisture shortages and the degradation of productive soils.
+        <br><br>
+        Yet innovation does not have to mean taking greater risks.
+        <strong>This guide turns research into decisions farmers can test
+        on their own land.</strong>
+        <br><br>
+        It brings together field trials, farm economics, scientific
+        evidence and the practical experience of Ukrainian farmers to
+        identify technologies that can make farms more resilient,
+        resource-efficient and profitable.
+    </div>
+
+</section>
+
+
+<section class="statement">
+
+    <div class="statement-inner">
+
+        <div class="eyebrow">Evidence into action</div>
+
+        <h2>
+            Don't adopt innovation because someone tells you to.
+            <span>Test it. Measure it. Make it earn its place.</span>
+        </h2>
+
+    </div>
+
+</section>
+
+
+<section class="practices">
+
+    <div class="practices-header">
+        <div class="section-number">02 / WHAT WE TESTED</div>
+        <h2>Four challenges. Practical responses.</h2>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-number">01</div>
+            <h3>Reduced tillage</h3>
+            <p>
+                Reduce machinery passes, fuel consumption and labour
+                requirements while protecting soil structure and conserving
+                moisture.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-number">02</div>
+            <h3>Biological products</h3>
+            <p>
+                Explore how beneficial microorganisms can support crop
+                performance, nutrient availability, soil health and farm
+                economics.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-number">03</div>
+            <h3>Biochar</h3>
+            <p>
+                Test a long-term investment in soil capable of improving
+                moisture retention, nutrient availability and resilience.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-number">04</div>
+            <h3>War-damaged soils</h3>
+            <p>
+                Examine pathways for safely restoring agricultural land
+                affected by physical degradation and contamination resulting
+                from hostilities.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="war">
+
+    <div class="war-inner">
+
+        <div class="section-number">03 / WHY IT MATTERS</div>
+
+        <h2>
+            Ukraine's farms cannot wait for perfect conditions.
+        </h2>
+
+        <p>
+            Innovation under wartime conditions is not an abstract exercise.
+            It is about protecting margins, conserving scarce resources,
+            rebuilding damaged soils and ensuring that Ukrainian agriculture
+            remains productive through one of the most difficult periods in
+            its history.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="cta">
+
+    <h2>Take it to the field.</h2>
+
+    <p>
+        Explore the evidence, run the numbers and use the guide's
+        low-risk trial pathway to test promising practices on your own farm.
+    </p>
+
+    <a class="btn"
+       href="14102026%20Farmer%20Guide%20EN.pdf"
+       target="_blank">
+        Open the full guide →
+    </a>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+            <div class="footer-title">
+                Futureproof Sustainable Farming Guide
+            </div>
+
+            <div class="footer-small">
+                Practical solutions for resilient and profitable farms.
+                Ukraine, 2026.
+            </div>
+        </div>
+
+        <div class="footer-small">
+            Developed with the contribution of researchers, farmers and
+            project partners, with support from the Minderoo Foundation.
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
